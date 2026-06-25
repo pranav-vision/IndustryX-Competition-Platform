@@ -35,5 +35,12 @@ if(!isset($_SESSION['user_id']))
    class="btn btn-primary">
    Register
 </a>
+
+<a href="submit_project.php"
+   class="btn btn-warning">
+
+   Submit Project
+
+</a>
 </body>
 </html>
