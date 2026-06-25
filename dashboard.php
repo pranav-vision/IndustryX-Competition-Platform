@@ -27,5 +27,8 @@ if(!isset($_SESSION['user_id']))
    Logout
 </a>
 
+<a href="competitions.php" class="btn btn-primary">
+    View Competitions
+</a>
 </body>
 </html>
