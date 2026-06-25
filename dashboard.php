@@ -30,5 +30,10 @@ if(!isset($_SESSION['user_id']))
 <a href="competitions.php" class="btn btn-primary">
     View Competitions
 </a>
+
+<a href="register_competition.php?id=<?php echo $row['id']; ?>"
+   class="btn btn-primary">
+   Register
+</a>
 </body>
 </html>
