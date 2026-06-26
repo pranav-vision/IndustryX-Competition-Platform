@@ -19,6 +19,15 @@ if(isset($_GET['search']))
     $search = mysqli_real_escape_string($conn, $_GET['search']);
 }
 
+/* Status Filter */
+
+$status = "";
+
+if(isset($_GET['status']))
+{
+    $status = mysqli_real_escape_string($conn, $_GET['status']);
+}
+
 /* SQL Query */
 
 $sql = "SELECT
@@ -45,21 +54,28 @@ INNER JOIN competitions
 ON projects.competition_id = competitions.id
 
 WHERE
-
+(
 users.name LIKE '%$search%'
-
 OR
-
 projects.project_title LIKE '%$search%'
+)";
 
-ORDER BY projects.submitted_at DESC";
+/* Apply Status Filter */
+
+if($status != "")
+{
+    $sql .= " AND projects.status='$status'";
+}
+
+/* Sort */
+
+$sql .= " ORDER BY projects.submitted_at DESC";
 
 $result = mysqli_query($conn,$sql);
 
 ?>
 
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -82,32 +98,59 @@ Project Submissions
 Dashboard
 </a>
 
-<!-- Search Form -->
+<!-- Search + Filter Form -->
 
 <form method="GET" class="row mb-4">
 
-    <div class="col-md-10">
+<div class="col-md-6">
 
-        <input
-        type="text"
-        name="search"
-        class="form-control"
-        placeholder="Search by Participant or Project"
-        value="<?php echo htmlspecialchars($search); ?>">
+<input
+type="text"
+name="search"
+class="form-control"
+placeholder="Search Participant or Project"
+value="<?php echo htmlspecialchars($search); ?>">
 
-    </div>
+</div>
 
-    <div class="col-md-2">
+<div class="col-md-4">
 
-        <button
-        type="submit"
-        class="btn btn-primary w-100">
+<select
+name="status"
+class="form-select">
 
-        Search
+<option value="">All Status</option>
 
-        </button>
+<option value="Pending"
+<?php if($status=="Pending") echo "selected"; ?>>
+Pending
+</option>
 
-    </div>
+<option value="Approved"
+<?php if($status=="Approved") echo "selected"; ?>>
+Approved
+</option>
+
+<option value="Rejected"
+<?php if($status=="Rejected") echo "selected"; ?>>
+Rejected
+</option>
+
+</select>
+
+</div>
+
+<div class="col-md-2">
+
+<button
+type="submit"
+class="btn btn-primary w-100">
+
+Filter
+
+</button>
+
+</div>
 
 </form>
 
@@ -143,7 +186,7 @@ Dashboard
 
 <tbody>
 
-<?php while($row=mysqli_fetch_assoc($result)){ ?>
+<?php while($row = mysqli_fetch_assoc($result)){ ?>
 
 <tr>
 
