@@ -1,3 +1,25 @@
+<?php
+
+include 'includes/db.php';
+
+$user_count = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM users")
+)['total'];
+
+$competition_count = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM competitions")
+)['total'];
+
+$project_count = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects")
+)['total'];
+
+$winner_count = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects WHERE status='Approved'")
+)['total'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,29 +94,29 @@
 
         <div class="col-md-3">
             <div class="card text-center p-4">
-                <h2>500+</h2>
+                <h2><?php echo $user_count; ?></h2>
                 <p>Participants</p>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="card text-center p-4">
-                <h2>200+</h2>
+                <h2><?php echo $project_count; ?></h2>
                 <p>Projects</p>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="card text-center p-4">
-                <h2>15+</h2>
+                <h2><?php echo $competition_count; ?></h2>
                 <p>Competitions</p>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="card text-center p-4">
-                <h2>50+</h2>
-                <p>Winners</p>
+                <h2><?php echo $winner_count; ?></h2>
+                <p>Approved Projects</p>
             </div>
         </div>
 
