@@ -10,7 +10,19 @@ if(!isset($_SESSION['admin_id']))
 
 include "../includes/db.php";
 
+/* Search */
+
+$search = "";
+
+if(isset($_GET['search']))
+{
+    $search = mysqli_real_escape_string($conn, $_GET['search']);
+}
+
+/* SQL Query */
+
 $sql = "SELECT
+
 projects.id,
 projects.project_title,
 projects.description,
@@ -19,7 +31,9 @@ projects.submitted_at,
 projects.status,
 projects.score,
 projects.remarks,
+
 users.name,
+
 competitions.title AS competition_name
 
 FROM projects
@@ -29,6 +43,14 @@ ON projects.user_id = users.id
 
 INNER JOIN competitions
 ON projects.competition_id = competitions.id
+
+WHERE
+
+users.name LIKE '%$search%'
+
+OR
+
+projects.project_title LIKE '%$search%'
 
 ORDER BY projects.submitted_at DESC";
 
@@ -59,6 +81,35 @@ Project Submissions
 <a href="dashboard.php" class="btn btn-secondary mb-3">
 Dashboard
 </a>
+
+<!-- Search Form -->
+
+<form method="GET" class="row mb-4">
+
+    <div class="col-md-10">
+
+        <input
+        type="text"
+        name="search"
+        class="form-control"
+        placeholder="Search by Participant or Project"
+        value="<?php echo htmlspecialchars($search); ?>">
+
+    </div>
+
+    <div class="col-md-2">
+
+        <button
+        type="submit"
+        class="btn btn-primary w-100">
+
+        Search
+
+        </button>
+
+    </div>
+
+</form>
 
 <table class="table table-bordered table-striped table-light">
 
@@ -105,18 +156,28 @@ Dashboard
 <td><?php echo htmlspecialchars($row['project_title']); ?></td>
 
 <td>
+
 <?php echo htmlspecialchars($row['status']); ?>
+
 </td>
 
 <td>
+
 <?php echo $row['score']; ?>/100
+
 </td>
 
 <td>
+
 <?php echo !empty($row['remarks']) ? htmlspecialchars($row['remarks']) : "-"; ?>
+
 </td>
 
-<td><?php echo $row['submitted_at']; ?></td>
+<td>
+
+<?php echo $row['submitted_at']; ?>
+
+</td>
 
 <td>
 
