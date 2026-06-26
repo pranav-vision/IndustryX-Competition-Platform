@@ -133,6 +133,22 @@ Rejected
 
 <div class="mb-3">
 
+<label>Project Score (0 - 100)</label>
+
+<input
+type="number"
+name="score"
+class="form-control"
+min="0"
+max="100"
+value="<?php echo $project['score']; ?>"
+required>
+
+</div>
+
+
+<div class="mb-3">
+
 <label>Remarks</label>
 
 <textarea

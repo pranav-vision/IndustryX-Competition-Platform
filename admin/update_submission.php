@@ -13,10 +13,12 @@ include "../includes/db.php";
 $project_id = $_POST['project_id'];
 $status = $_POST['status'];
 $remarks = $_POST['remarks'];
+$score = $_POST['score'];
 
 $sql = "UPDATE projects
 SET
 status='$status',
+score='$score',
 remarks='$remarks'
 WHERE id='$project_id'";
 

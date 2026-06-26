@@ -17,6 +17,7 @@ projects.description,
 projects.file_name,
 projects.submitted_at,
 projects.status,
+projects.score,
 projects.remarks,
 users.name,
 competitions.title AS competition_name
@@ -75,6 +76,8 @@ Dashboard
 
 <th>Status</th>
 
+<th>Score</th>
+
 <th>Remarks</th>
 
 <th>Submitted</th>
@@ -103,6 +106,10 @@ Dashboard
 
 <td>
 <?php echo htmlspecialchars($row['status']); ?>
+</td>
+
+<td>
+<?php echo $row['score']; ?>/100
 </td>
 
 <td>
