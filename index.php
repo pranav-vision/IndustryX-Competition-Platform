@@ -18,6 +18,40 @@ $winner_count = mysqli_fetch_assoc(
 mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects WHERE status='Approved'")
 )['total'];
 
+$top_winners = mysqli_query($conn,"
+SELECT
+users.name,
+projects.score
+
+FROM projects
+
+INNER JOIN users
+ON projects.user_id = users.id
+
+WHERE projects.status='Approved'
+
+ORDER BY projects.score DESC
+
+LIMIT 3
+");
+
+$leaderboard = mysqli_query($conn,"
+SELECT
+users.name,
+projects.score
+
+FROM projects
+
+INNER JOIN users
+ON projects.user_id = users.id
+
+WHERE projects.status='Approved'
+
+ORDER BY projects.score DESC
+
+LIMIT 5
+");
+
 ?>
 
 <!DOCTYPE html>
@@ -205,29 +239,52 @@ mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects WHERE status='Approve
 
     <div class="row">
 
-        <div class="col-md-4">
-            <div class="card p-4 text-center">
-                <h3>🥇</h3>
-                <h4>Winner 1</h4>
-                <p>Score : 98</p>
+        <?php
+
+        $medals = ["🥇","🥈","🥉"];
+
+        $i = 0;
+
+        while($winner = mysqli_fetch_assoc($top_winners))
+        {
+
+        ?>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card p-4 text-center shadow h-100">
+
+                <h1>
+
+                    <?php echo $medals[$i]; ?>
+
+                </h1>
+
+                <h4>
+
+                    <?php echo htmlspecialchars($winner['name']); ?>
+
+                </h4>
+
+                <p class="fs-5">
+
+                    <strong>Score :</strong>
+
+                    <?php echo $winner['score']; ?>/100
+
+                </p>
+
             </div>
+
         </div>
 
-        <div class="col-md-4">
-            <div class="card p-4 text-center">
-                <h3>🥈</h3>
-                <h4>Winner 2</h4>
-                <p>Score : 95</p>
-            </div>
-        </div>
+        <?php
 
-        <div class="col-md-4">
-            <div class="card p-4 text-center">
-                <h3>🥉</h3>
-                <h4>Winner 3</h4>
-                <p>Score : 92</p>
-            </div>
-        </div>
+        $i++;
+
+        }
+
+        ?>
 
     </div>
 
@@ -251,25 +308,60 @@ mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects WHERE status='Approve
 
         <tbody>
 
-            <tr>
-                <td>🥇 1</td>
-                <td>Pranav Ishwar Patil</td>
-                <td>98</td>
-            </tr>
+<?php
 
-            <tr>
-                <td>🥈 2</td>
-                <td>Sudharm Shrikant Sathe</td>
-                <td>95</td>
-            </tr>
+$rank = 1;
 
-            <tr>
-                <td>🥉 3</td>
-                <td>Purva Raj Desai</td>
-                <td>92</td>
-            </tr>
+while($row = mysqli_fetch_assoc($leaderboard))
+{
 
-        </tbody>
+?>
+
+<tr>
+
+<td>
+
+<?php
+
+if($rank==1)
+echo "🥇";
+
+elseif($rank==2)
+echo "🥈";
+
+elseif($rank==3)
+echo "🥉";
+
+else
+echo $rank;
+
+?>
+
+</td>
+
+<td>
+
+<?php echo htmlspecialchars($row['name']); ?>
+
+</td>
+
+<td>
+
+<?php echo $row['score']; ?>/100
+
+</td>
+
+</tr>
+
+<?php
+
+$rank++;
+
+}
+
+?>
+
+</tbody>
 
     </table>
 
