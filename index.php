@@ -13,25 +13,25 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
+    <div class="container">
 
-    <a class="navbar-brand" href="#">
-        IndustryX
-    </a>
-
-    <div>
-
-        <a class="btn btn-outline-light me-2" href="login.php">
-            Login
+        <a class="navbar-brand" href="index.php">
+            IndustryX
         </a>
 
-        <a class="btn btn-primary" href="register.php">
-            Register
-        </a>
+        <div>
+
+            <a class="btn btn-outline-light me-2" href="login.php">
+                Login
+            </a>
+
+            <a class="btn btn-primary" href="register.php">
+                Register
+            </a>
+
+        </div>
 
     </div>
-
-  </div>
 </nav>
 
 <div class="container text-center mt-5">
@@ -54,8 +54,12 @@
             Register Now
         </a>
 
-        <a href="#" class="btn btn-outline-light btn-lg">
-            View Results
+        <a href="leaderboard.php" class="btn btn-warning btn-lg me-3">
+            🏆 Leaderboard
+        </a>
+
+        <a href="competitions.php" class="btn btn-outline-light btn-lg">
+            View Competitions
         </a>
 
     </div>
@@ -224,26 +228,36 @@
         </thead>
 
         <tbody>
+
             <tr>
-                <td>1</td>
+                <td>🥇 1</td>
                 <td>Pranav Ishwar Patil</td>
                 <td>98</td>
             </tr>
 
             <tr>
-                <td>2</td>
+                <td>🥈 2</td>
                 <td>Sudharm Shrikant Sathe</td>
                 <td>95</td>
             </tr>
 
             <tr>
-                <td>3</td>
+                <td>🥉 3</td>
                 <td>Purva Raj Desai</td>
                 <td>92</td>
             </tr>
+
         </tbody>
 
     </table>
+
+    <div class="text-center mt-4">
+
+        <a href="leaderboard.php" class="btn btn-warning btn-lg">
+            🏆 View Full Leaderboard
+        </a>
+
+    </div>
 
 </div>
 
@@ -260,5 +274,6 @@
     </p>
 
 </footer>
+
 </body>
 </html>
