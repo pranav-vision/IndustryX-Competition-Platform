@@ -1,29 +1,24 @@
-<?php
+<td>
 
-session_start();
+<a
+href="edit_competition.php?id=<?php echo $row['id']; ?>"
+class="btn btn-primary btn-sm">
 
-if(!isset($_SESSION['admin_id']))
-{
-    header("Location: login.php");
-    exit();
-}
+Edit
 
-include "../includes/db.php";
+</a>
 
-if(isset($_GET['id']))
-{
+</td>
 
-$id=$_GET['id'];
+<td>
 
-mysqli_query(
-$conn,
-"DELETE FROM competitions WHERE id='$id'"
-);
+<a
+href="delete_competition.php?id=<?php echo $row['id']; ?>"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Delete this competition?');">
 
-}
+Delete
 
-header("Location: competitions.php");
+</a>
 
-exit();
-
-?>
+</td>
