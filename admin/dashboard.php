@@ -8,105 +8,192 @@ if(!isset($_SESSION['admin_id']))
     exit();
 }
 
+include "../includes/db.php";
+
+/* Dashboard Statistics */
+
+$user_count = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) AS total FROM users"))['total'];
+
+$competition_count = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) AS total FROM competitions"))['total'];
+
+$participant_count = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) AS total FROM competition_registrations"))['total'];
+
+$project_count = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects"))['total'];
+
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Admin Dashboard</title>
+<meta charset="UTF-8">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard | IndustryX</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#1f2937;
+}
+
+.card{
+    border:none;
+    border-radius:15px;
+}
+
+</style>
 
 </head>
 
-<body class="bg-dark text-white">
+<body>
 
 <div class="container mt-5">
 
-<h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<div>
+
+<h2 class="text-white">
 Welcome,
 <?php echo $_SESSION['admin_name']; ?>
-</h1>
+</h2>
 
-<hr>
+<p class="text-light">
+IndustryX Competition Management System
+</p>
 
-<!-- Navigation Buttons -->
+</div>
+
+<a href="logout.php" class="btn btn-danger">
+Logout
+</a>
+
+</div>
+
+<hr class="text-light">
+
+<!-- Navigation -->
 
 <div class="mb-4">
 
-    <a href="create_competition.php" class="btn btn-primary">
-        ➕ Create Competition
-    </a>
+<a href="create_competition.php" class="btn btn-primary me-2">
+➕ Create Competition
+</a>
 
-    <a href="competitions.php" class="btn btn-success">
-        📋 Manage Competitions
-    </a>
+<a href="competitions.php" class="btn btn-success me-2">
+📋 Manage Competitions
+</a>
 
-    <a href="participants.php" class="btn btn-warning">
-        👥 Participants
-    </a>
+<a href="participants.php" class="btn btn-warning me-2">
+👥 Participants
+</a>
 
-    <a href="submissions.php" class="btn btn-info text-white">
-        📁 Project Submissions
-    </a>
+<a href="submissions.php" class="btn btn-info text-white me-2">
+📁 Project Submissions
+</a>
 
-    <a href="logout.php" class="btn btn-danger">
-        🚪 Logout
-    </a>
+<a href="../dashboard.php" class="btn btn-secondary">
+🏠 User Dashboard
+</a>
 
 </div>
 
-<!-- Dashboard Cards -->
+<!-- Statistics -->
 
 <div class="row">
 
-<div class="col-md-3">
+<div class="col-md-3 mb-4">
 
-<div class="card p-3 text-center">
+<div class="card shadow text-center p-4">
 
-<h4>Total Users</h4>
+<h5>Total Users</h5>
 
-<p class="fs-4">Coming Soon</p>
+<h1 class="text-primary">
 
-</div>
+<?php echo $user_count; ?>
 
-</div>
-
-<div class="col-md-3">
-
-<div class="card p-3 text-center">
-
-<h4>Competitions</h4>
-
-<p class="fs-4">Coming Soon</p>
+</h1>
 
 </div>
 
 </div>
 
-<div class="col-md-3">
+<div class="col-md-3 mb-4">
 
-<div class="card p-3 text-center">
+<div class="card shadow text-center p-4">
 
-<h4>Projects</h4>
+<h5>Competitions</h5>
 
-<p class="fs-4">Coming Soon</p>
+<h1 class="text-success">
+
+<?php echo $competition_count; ?>
+
+</h1>
+
+</div>
+
+</div>
+
+<div class="col-md-3 mb-4">
+
+<div class="card shadow text-center p-4">
+
+<h5>Participants</h5>
+
+<h1 class="text-warning">
+
+<?php echo $participant_count; ?>
+
+</h1>
 
 </div>
 
 </div>
 
-<div class="col-md-3">
+<div class="col-md-3 mb-4">
 
-<div class="card p-3 text-center">
+<div class="card shadow text-center p-4">
 
-<h4>Participants</h4>
+<h5>Projects</h5>
 
-<p class="fs-4">Coming Soon</p>
+<h1 class="text-danger">
+
+<?php echo $project_count; ?>
+
+</h1>
 
 </div>
+
+</div>
+
+</div>
+
+<!-- Quick Information -->
+
+<div class="card mt-3 shadow">
+
+<div class="card-body">
+
+<h4>
+Quick Actions
+</h4>
+
+<p>
+
+✔ Create and manage competitions.<br>
+
+✔ View registered participants.<br>
+
+✔ Monitor uploaded projects.<br>
+
+✔ Manage the complete IndustryX competition platform.
+
+</p>
 
 </div>
 
