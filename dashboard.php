@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -13,34 +12,51 @@ if(!isset($_SESSION['user_id']))
 
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Dashboard</title>
+
+<title>User Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
-<body>
 
-<h1>Welcome to IndustryX Dashboard</h1>
+<body class="bg-dark text-white">
 
-<p>You are successfully logged in.</p>
+<div class="container mt-5">
+
+<h1>
+Welcome to IndustryX Dashboard
+</h1>
+
+<p>
+You are successfully logged in.
+</p>
+
+<hr>
 
 <a href="logout.php"
-   class="btn btn-danger">
-   Logout
+class="btn btn-danger me-2">
+Logout
 </a>
 
-<a href="competitions.php" class="btn btn-primary">
-    View Competitions
+<a href="competitions.php"
+class="btn btn-primary me-2">
+View Competitions
 </a>
 
-<a href="register_competition.php?id=<?php echo $row['id']; ?>"
-   class="btn btn-primary">
-   Register
+<a href="my_competitions.php"
+class="btn btn-success me-2">
+My Competitions
 </a>
 
 <a href="submit_project.php"
-   class="btn btn-warning">
-
-   Submit Project
-
+class="btn btn-warning">
+Submit Project
 </a>
+
+</div>
+
 </body>
+
 </html>
