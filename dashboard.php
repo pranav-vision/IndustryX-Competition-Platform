@@ -51,8 +51,13 @@ My Competitions
 </a>
 
 <a href="submit_project.php"
-class="btn btn-warning">
+class="btn btn-warning me-2">
 Submit Project
+</a>
+
+<a href="my_projects.php"
+class="btn btn-info">
+My Projects
 </a>
 
 </div>
