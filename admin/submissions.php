@@ -180,6 +180,8 @@ Filter
 
 <th>Review</th>
 
+<th>Delete</th>
+
 </tr>
 
 </thead>
@@ -242,6 +244,19 @@ href="review_submission.php?id=<?php echo $row['id']; ?>"
 class="btn btn-primary btn-sm">
 
 Review
+
+</a>
+
+</td>
+
+<td>
+
+<a
+href="delete_submission.php?id=<?php echo $row['id']; ?>"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Are you sure you want to delete this project?');">
+
+Delete
 
 </a>
 
