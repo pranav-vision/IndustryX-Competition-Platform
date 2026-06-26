@@ -48,6 +48,7 @@ body{
 
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -202,6 +203,69 @@ Quick Actions
 </div>
 
 </div>
+
+
+<div class="card mt-5 shadow">
+
+<div class="card-body">
+
+<h3 class="text-center mb-4">
+
+Platform Statistics
+
+</h3>
+
+<canvas id="dashboardChart"></canvas>
+
+</div>
+
+</div>
+
+<script>
+
+const ctx = document.getElementById('dashboardChart');
+
+new Chart(ctx, {
+
+type: 'bar',
+
+data: {
+
+labels: [
+
+'Users',
+
+'Competitions',
+
+'Participants',
+
+'Projects'
+
+],
+
+datasets: [{
+
+label: 'IndustryX Statistics',
+
+data: [
+
+<?php echo $user_count; ?>,
+
+<?php echo $competition_count; ?>,
+
+<?php echo $participant_count; ?>,
+
+<?php echo $project_count; ?>
+
+]
+
+}]
+
+}
+
+});
+
+</script>
 
 </body>
 
