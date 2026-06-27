@@ -53,6 +53,29 @@ GROUP BY competitions.id
 
 ORDER BY competitions.title
 ");
+
+$monthly_projects = mysqli_query($conn,"
+SELECT
+
+MONTHNAME(submitted_at) AS month,
+
+COUNT(*) AS total
+
+FROM projects
+
+GROUP BY MONTH(submitted_at)
+
+ORDER BY MONTH(submitted_at)
+");
+
+$months = [];
+$totals = [];
+
+while($row = mysqli_fetch_assoc($monthly_projects))
+{
+    $months[] = $row['month'];
+    $totals[] = $row['total'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -78,6 +101,7 @@ body{
     border:none;
     border-radius:15px;
 }
+
 
 </style>
 
@@ -554,6 +578,61 @@ position: 'bottom'
 
 
 }
+
+}
+
+});
+
+</script>
+
+<div class="card mt-5 shadow mx-auto" style="width:1300px;">
+
+<div class="card shadow mt-5">
+
+<div class="card-body">
+
+<h3 class="text-center mb-4">
+
+Monthly Project Submissions
+
+</h3>
+
+<canvas id="monthlyChart"></canvas>
+
+</div>
+
+</div>
+
+<script>
+
+const monthlyCtx = document.getElementById('monthlyChart');
+
+new Chart(monthlyCtx,{
+
+type:'line',
+
+data:{
+
+labels:<?php echo json_encode($months); ?>,
+
+datasets:[{
+
+label:'Projects Submitted',
+
+data:<?php echo json_encode($totals); ?>,
+
+fill:false,
+
+tension:0.3,
+
+pointRadius:8,
+
+pointHoverRadius:12,
+
+pointBorderWidth:2
+
+}]
+
 
 }
 
