@@ -284,21 +284,28 @@ Quick Actions
 </div>
 
 
-<div class="card mt-5 shadow">
+<!-- Platform Statistics -->
 
-<div class="card-body">
 
-<h3 class="text-center mb-4">
+<div class="card mt-5 shadow mx-auto" style="width:1300px;">
 
-Platform Statistics
+    <div class="card-body">
 
-</h3>
 
-<canvas id="dashboardChart"></canvas>
+        <h3 class="text-center mb-4">
+            Platform Statistics
+        </h3>
+        <div style="width:700px; height:350px; margin:auto;">
+
+            <canvas id="dashboardChart"></canvas>
+
+  
+        </div>
+
+    </div>
 
 </div>
 
-</div>
 
 <script>
 
@@ -306,41 +313,93 @@ const ctx = document.getElementById('dashboardChart');
 
 new Chart(ctx, {
 
-type: 'bar',
+    type: 'bar',
 
-data: {
+    data: {
 
-labels: [
+        labels: [
 
-'Users',
+            'Users',
+            'Competitions',
+            'Participants',
+            'Projects'
 
-'Competitions',
+        ],
 
-'Participants',
+        datasets: [{
 
-'Projects'
+            label: 'IndustryX Statistics',
 
-],
+            data: [
 
-datasets: [{
+                <?php echo $user_count; ?>,
+                <?php echo $competition_count; ?>,
+                <?php echo $participant_count; ?>,
+                <?php echo $project_count; ?>
 
-label: 'IndustryX Statistics',
+            ],
 
-data: [
+            backgroundColor: [
 
-<?php echo $user_count; ?>,
+                '#0d6efd',
+                '#198754',
+                '#ffc107',
+                '#dc3545'
 
-<?php echo $competition_count; ?>,
+            ],
 
-<?php echo $participant_count; ?>,
+            borderColor: [
 
-<?php echo $project_count; ?>
+                '#0d6efd',
+                '#198754',
+                '#ffc107',
+                '#dc3545'
 
-]
+            ],
 
-}]
+            borderWidth: 5,
 
-}
+            borderRadius: 16,
+
+            barThickness: 60
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        plugins: {
+
+            legend: {
+
+                display: false
+
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true,
+
+                ticks: {
+
+                    stepSize: 1
+
+                }
+
+            }
+
+        }
+
+    }
 
 });
 
@@ -413,6 +472,94 @@ Competition Statistics
 </div>
 
 </div>
+
+<!-- Project Status Distribution -->
+
+<div class="container mt-5">
+
+<div class="card shadow mt-5">
+
+<div class="card-body">
+
+<h3 class="text-center mb-4">
+
+🥧 Project Status Distribution
+
+</h3>
+
+<div style="width:350px; height:350px; margin:auto;">
+
+<canvas id="statusChart"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<script>
+
+const statusCtx = document.getElementById('statusChart');
+
+new Chart(statusCtx, {
+
+type: 'pie',
+
+data: {
+
+labels: [
+
+'Pending',
+
+'Approved',
+
+'Rejected'
+
+],
+
+datasets: [{
+
+data: [
+
+<?php echo $pending_count; ?>,
+
+<?php echo $approved_count; ?>,
+
+<?php echo $rejected_count; ?>
+
+
+
+]
+
+}]
+
+
+
+},
+
+options: {
+
+responsive: true,
+
+maintainAspectRatio: false,
+
+plugins: {
+
+legend: {
+
+position: 'bottom'
+
+}
+
+
+}
+
+}
+
+});
+
+</script>
 
 </body>
 
