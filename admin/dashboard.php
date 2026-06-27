@@ -76,6 +76,26 @@ while($row = mysqli_fetch_assoc($monthly_projects))
     $months[] = $row['month'];
     $totals[] = $row['total'];
 }
+
+$recent_projects = mysqli_query($conn,"
+SELECT
+
+projects.project_title,
+projects.status,
+projects.submitted_at,
+
+users.name
+
+FROM projects
+
+INNER JOIN users
+ON projects.user_id = users.id
+
+ORDER BY projects.submitted_at DESC
+
+LIMIT 5
+");
+
 ?>
 
 <!DOCTYPE html>
@@ -640,6 +660,79 @@ pointBorderWidth:2
 
 </script>
 
-</body>
+
+<div class="card shadow mt-5">
+
+<div class="card-header bg-primary text-white">
+
+<h3>
+
+Recent Project Activity
+
+</h3>
+
+</div>
+
+<div class="card-body">
+
+<table class="table table-striped">
+
+<thead>
+
+<tr>
+
+<th>Participant</th>
+
+<th>Project</th>
+
+<th>Status</th>
+
+<th>Submitted</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<?php while($row = mysqli_fetch_assoc($recent_projects)){ ?>
+
+<tr>
+
+<td>
+
+<?php echo htmlspecialchars($row['name']); ?>
+
+</td>
+
+<td>
+
+<?php echo htmlspecialchars($row['project_title']); ?>
+
+</td>
+
+<td>
+
+<?php echo htmlspecialchars($row['status']); ?>
+
+</td>
+
+<td>
+
+<?php echo $row['submitted_at']; ?>
+
+</td>
+
+</tr>
+
+<?php } ?>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div></body>
 
 </html>
