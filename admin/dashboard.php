@@ -171,11 +171,16 @@ Logout
 📁 Project Submissions
 </a>
 
+<a href="export_projects.php"
+class="btn btn-success me-2">
+
+📥 Export CSV
+
+</a>
 
 <a href="../dashboard.php" class="btn btn-secondary">
 🏠 User Dashboard
 </a>
-
 
 
 </div>
