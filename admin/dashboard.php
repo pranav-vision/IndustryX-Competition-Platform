@@ -31,6 +31,28 @@ mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects WHERE status='Approve
 $rejected_count = mysqli_fetch_assoc(
 mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects WHERE status='Rejected'")
 )['total'];
+
+$competition_stats = mysqli_query($conn,"
+SELECT
+
+competitions.title,
+
+COUNT(DISTINCT competition_registrations.user_id) AS participants,
+
+COUNT(DISTINCT projects.id) AS projects
+
+FROM competitions
+
+LEFT JOIN competition_registrations
+ON competitions.id = competition_registrations.competition_id
+
+LEFT JOIN projects
+ON competitions.id = projects.competition_id
+
+GROUP BY competitions.id
+
+ORDER BY competitions.title
+");
 ?>
 
 <!DOCTYPE html>
@@ -148,6 +170,7 @@ Logout
 <a href="submissions.php" class="btn btn-info text-white me-2">
 📁 Project Submissions
 </a>
+
 
 <a href="../dashboard.php" class="btn btn-secondary">
 🏠 User Dashboard
@@ -317,6 +340,74 @@ data: [
 });
 
 </script>
+
+<div class="container mt-5">
+
+<div class="card shadow">
+
+<div class="card-header">
+
+<h3>
+Competition Statistics
+</h3>
+
+</div>
+
+<div class="card-body">
+
+<table class="table table-striped">
+
+<thead>
+
+<tr>
+
+<th>Competition</th>
+
+<th>Participants</th>
+
+<th>Projects</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<?php while($row = mysqli_fetch_assoc($competition_stats)){ ?>
+
+<tr>
+
+<td>
+
+<?php echo htmlspecialchars($row['title']); ?>
+
+</td>
+
+<td>
+
+<?php echo $row['participants']; ?>
+
+</td>
+
+<td>
+
+<?php echo $row['projects']; ?>
+
+</td>
+
+</tr>
+
+<?php } ?>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
 
 </body>
 
