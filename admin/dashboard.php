@@ -20,6 +20,17 @@ $participant_count = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) AS t
 
 $project_count = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects"))['total'];
 
+$pending_count = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects WHERE status='Pending'")
+)['total'];
+
+$approved_count = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects WHERE status='Approved'")
+)['total'];
+
+$rejected_count = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM projects WHERE status='Rejected'")
+)['total'];
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +88,46 @@ Logout
 </div>
 
 <hr class="text-light">
+
+<div class="row mb-4">
+
+<div class="col-md-4">
+
+<div class="alert alert-warning">
+
+<h5>🔔 Pending Reviews</h5>
+
+<h2><?php echo $pending_count; ?></h2>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="alert alert-success">
+
+<h5>✅ Approved Projects</h5>
+
+<h2><?php echo $approved_count; ?></h2>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="alert alert-danger">
+
+<h5>❌ Rejected Projects</h5>
+
+<h2><?php echo $rejected_count; ?></h2>
+
+</div>
+
+</div>
+
+</div>
 
 <!-- Navigation -->
 
