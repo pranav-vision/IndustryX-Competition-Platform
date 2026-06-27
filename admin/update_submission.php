@@ -24,6 +24,16 @@ WHERE id='$project_id'";
 
 if(mysqli_query($conn,$sql))
 {
+    // Include activity logger
+    include "log_activity.php";
+
+    // Save admin activity
+    logActivity(
+        $conn,
+        $_SESSION['admin_name'],
+        "Reviewed Project ID: " . $project_id
+    );
+
     header("Location: submissions.php");
     exit();
 }

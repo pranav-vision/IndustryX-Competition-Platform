@@ -226,6 +226,14 @@ class="btn btn-success me-2">
 🏠 User Dashboard
 </a>
 
+<a href="profile.php" class="btn btn-dark me-2">
+👤 Profile
+</a>
+
+<a href="activity_logs.php" class="btn btn-dark me-2">
+📜 Activity Logs
+</a>
+
 
 </div>
 

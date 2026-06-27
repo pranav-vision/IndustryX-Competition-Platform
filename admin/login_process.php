@@ -20,6 +20,13 @@ if(mysqli_num_rows($result) == 1)
     {
         $_SESSION['admin_id'] = $admin['id'];
         $_SESSION['admin_name'] = $admin['name'];
+        include "log_activity.php";
+
+logActivity(
+    $conn,
+    $admin['name'],
+    "Logged into the admin dashboard"
+);
 
         header("Location: dashboard.php");
         exit();
