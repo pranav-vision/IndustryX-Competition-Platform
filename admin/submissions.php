@@ -94,6 +94,33 @@ $result = mysqli_query($conn,$sql);
 Project Submissions
 </h2>
 
+<?php
+
+if(isset($_GET['success']))
+{
+
+?>
+
+<div class="alert alert-success alert-dismissible fade show">
+
+<strong>Success!</strong>
+
+Project review updated successfully.
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="alert">
+</button>
+
+</div>
+
+<?php
+
+}
+
+?>
+
 <a href="dashboard.php" class="btn btn-secondary mb-3">
 Dashboard
 </a>
@@ -271,6 +298,8 @@ Delete
 </table>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

@@ -34,7 +34,7 @@ if(mysqli_query($conn,$sql))
         "Reviewed Project ID: " . $project_id
     );
 
-    header("Location: submissions.php");
+    header("Location: submissions.php?success=review");
     exit();
 }
 else
