@@ -119,9 +119,23 @@ body{
 
 .card{
     border:none;
-    border-radius:15px;
+    border-radius:18px;
+    transition:0.3s;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 35px rgba(0,0,0,.30);
+}
+
+.btn{
+    border-radius:10px;
+}
+
+canvas{
+    max-height:400px;
+}
 
 </style>
 
@@ -245,7 +259,7 @@ class="btn btn-success me-2">
 
 <div class="card shadow text-center p-4">
 
-<h5>Total Users</h5>
+<h5>👥 Total Users</h5>
 
 <h1 class="text-primary">
 
@@ -261,7 +275,7 @@ class="btn btn-success me-2">
 
 <div class="card shadow text-center p-4">
 
-<h5>Competitions</h5>
+<h5>🏆 Competitions</h5>
 
 <h1 class="text-success">
 
@@ -277,7 +291,7 @@ class="btn btn-success me-2">
 
 <div class="card shadow text-center p-4">
 
-<h5>Participants</h5>
+<h5>👤 Participants</h5>
 
 <h1 class="text-warning">
 
@@ -293,7 +307,7 @@ class="btn btn-success me-2">
 
 <div class="card shadow text-center p-4">
 
-<h5>Projects</h5>
+<h5>📁 Projects</h5>
 
 <h1 class="text-danger">
 
