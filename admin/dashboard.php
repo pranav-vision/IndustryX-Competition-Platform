@@ -756,6 +756,6 @@ Recent Project Activity
 </div>
 
 </div></body>
-<script src="../assets/js/script.js"></script>
+
 </body>
 </html>

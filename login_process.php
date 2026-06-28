@@ -9,19 +9,29 @@ $password = $_POST['password'];
 
 $sql = "SELECT * FROM users WHERE email='$email'";
 
-$result = mysqli_query($conn,$sql);
+$result = mysqli_query($conn, $sql);
 
-$user = mysqli_fetch_assoc($result);
-
-if($user && password_verify($password,$user['password']))
+if(mysqli_num_rows($result) == 1)
 {
-    $_SESSION['user_id'] = $user['id'];
+    $user = mysqli_fetch_assoc($result);
 
-    header("Location: dashboard.php");
+    if(password_verify($password, $user['password']))
+    {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_name'] = $user['name'];
+        $_SESSION['user_email'] = $user['email'];
+
+        header("Location: dashboard.php");
+        exit();
+    }
+    else
+    {
+        echo "Invalid Password";
+    }
 }
 else
 {
-    echo "Invalid Email or Password";
+    echo "User Not Found";
 }
 
 ?>
