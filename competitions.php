@@ -103,6 +103,6 @@ $result = mysqli_query(
     </div>
 
 </div>
-
+<script src="assets/js/script.js"></script>
 </body>
 </html>

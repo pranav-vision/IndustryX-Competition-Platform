@@ -56,6 +56,6 @@ $result = mysqli_query($conn, $sql);
     </div>
 
 </div>
-
+<script src="assets/js/script.js"></script>
 </body>
 </html>
